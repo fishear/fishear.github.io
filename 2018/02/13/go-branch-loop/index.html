@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://fishear.github.io">
-  <title>Archives | Icey Yu&#39;s Blog</title>
+  <title>Go语言条件语句与循环 | Icey Yu&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Icey Yu&#39;s Blog">
-<meta property="og:url" content="https://fishear.github.io/archives/index.html">
+  <meta name="description" content="1. if语句 if的条件里可以赋值 if的条件里赋值的变量作用域就在这个if语句里123456const filename = &amp;quot;file.txt&amp;quot;if contents, err := ioutil.ReadFile(filename); err !=nil &amp;#123;    fmt.Println(err)&amp;#125; else &amp;#123;    fmt.Printf">
+<meta name="keywords" content="Go, branch, loop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言条件语句与循环">
+<meta property="og:url" content="https://fishear.github.io/2018/02/13/go-branch-loop/index.html">
 <meta property="og:site_name" content="Icey Yu&#39;s Blog">
+<meta property="og:description" content="1. if语句 if的条件里可以赋值 if的条件里赋值的变量作用域就在这个if语句里123456const filename = &amp;quot;file.txt&amp;quot;if contents, err := ioutil.ReadFile(filename); err !=nil &amp;#123;    fmt.Println(err)&amp;#125; else &amp;#123;    fmt.Printf">
+<meta property="og:updated_time" content="2018-02-13T15:36:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Icey Yu&#39;s Blog">
+<meta name="twitter:title" content="Go语言条件语句与循环">
+<meta name="twitter:description" content="1. if语句 if的条件里可以赋值 if的条件里赋值的变量作用域就在这个if语句里123456const filename = &amp;quot;file.txt&amp;quot;if contents, err := ioutil.ReadFile(filename); err !=nil &amp;#123;    fmt.Println(err)&amp;#125; else &amp;#123;    fmt.Printf">
   
     <link rel="alternative" href="/atom.xml" title="Icey Yu&#39;s Blog" type="application/atom+xml">
   
@@ -153,36 +158,76 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-go-branch-loop" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/13/go-branch-loop/" class="archive-article-date">
-  	<time datetime="2018-02-13T15:29:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-13</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/13/go-branch-loop/">Go语言条件语句与循环</a>
+    <h1 class="article-title" itemprop="name">
+      Go语言条件语句与循环
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/02/13/go-branch-loop/" class="archive-article-date">
+  	<time datetime="2018-02-13T15:29:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-if语句"><a href="#1-if语句" class="headerlink" title="1. if语句"></a>1. if语句</h3><ul>
+<li>if的条件里可以赋值</li>
+<li>if的条件里赋值的变量作用域就在这个if语句里<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const filename = &quot;file.txt&quot;</span><br><span class="line">if contents, err := ioutil.ReadFile(filename); err !=nil &#123;</span><br><span class="line">    fmt.Println(err)</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    fmt.Printf(&quot;%s\n&quot;, contents)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-switch语句"><a href="#2-switch语句" class="headerlink" title="2. switch语句"></a>2. switch语句</h3><ul>
+<li>switch会自动break（默认每个case后会有break）,不需要break除非使用fallthrough</li>
+<li>switch后可以没有表达式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">g := &quot;&quot;</span><br><span class="line">switch &#123;</span><br><span class="line">case score &lt; 0 || score &gt; 100:</span><br><span class="line">    panic(fmt.Sprintf(&quot;Wrong score: %d&quot;, score))</span><br><span class="line">case score &lt; 60:</span><br><span class="line">    g = &quot;F&quot;</span><br><span class="line">case score &lt; 80:</span><br><span class="line">    g = &quot;C&quot;</span><br><span class="line">case score &lt; 90:</span><br><span class="line">    g = &quot;B&quot;</span><br><span class="line">case score &lt;=100:</span><br><span class="line">    g = &quot;A&quot;</span><br><span class="line">default:</span><br><span class="line">    // panic会报错，并中断程序的执行</span><br><span class="line">    panic(fmt.Sprintf(&quot;Wrong score: %d&quot;, score))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-for循环"><a href="#3-for循环" class="headerlink" title="3. for循环"></a>3. for循环</h3><ul>
+<li>for的条件里不需要括号</li>
+<li>for的条件里可以省略初始条件，结束条件，递增表达式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">file, err := os.Open(filename)</span><br><span class="line">if err != nil &#123;</span><br><span class="line">    panic(err)</span><br><span class="line">&#125;</span><br><span class="line">scanner := bufio.NewScanner(file) // 逐行读取</span><br><span class="line"></span><br><span class="line">for scanner.Scan() &#123;</span><br><span class="line">    // 相当于while, go语言没有while语句；没有初始条件和递增条件，只有结束条件时，不需要分号</span><br><span class="line">    fmt.Println(scanner.Text())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>for, if后面的条件没有括号</li>
+<li>if条件里也可以定义变量</li>
+<li>没有while</li>
+<li>switch不需要break, 也可以直接switch多个条件</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -194,122 +239,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://fishear.github.io/2018/02/13/go-branch-loop/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/12/go-variable-definition/" class="archive-article-date">
-  	<time datetime="2018-02-12T15:34:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-12</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/02/12/go-variable-definition/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Go语言变量定义</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/12/go-variable-definition/">Go语言变量定义</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Go, varitalbe definition</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/12/fishear-first-blog/" class="archive-article-date">
-  	<time datetime="2018-02-12T14:13:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/12/fishear-first-blog/">fishear&#39;s first blog</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Go, 2018 Spring Festival</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/10/hello-world/" class="archive-article-date">
-  	<time datetime="2018-02-10T09:27:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/10/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -332,8 +361,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

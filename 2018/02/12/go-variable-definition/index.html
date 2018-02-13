@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://fishear.github.io">
   <title>Go语言变量定义 | Icey Yu&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 使用var关键字 var a, b, c bool var s1, s2 string = “hello”, “world” 可放在函数内，或直接放在包内(看上去像全局变量，其实不是) 使用var()集中定义变量 让编译器自动决定类型1var a, b, i, s1, s2 = true, false, 3, “hello”, “world&amp;quot;    使用:=定义变量  可以写得短一">
+  <meta name="description" content="1. 使用var关键字 var a, b, c bool var s1, s2 string = “hello”, “world” 可放在函数内，或直接放在包内(看上去像全局变量，其实不是) 使用var()集中定义变量 让编译器自动决定类型1var a, b, i, s1, s2 = true, false, 3, &amp;quot;hello&amp;quot;, &amp;quot;world&amp;quot;    使">
 <meta name="keywords" content="Go, varitalbe definition">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go语言变量定义">
 <meta property="og:url" content="https://fishear.github.io/2018/02/12/go-variable-definition/index.html">
 <meta property="og:site_name" content="Icey Yu&#39;s Blog">
-<meta property="og:description" content="1. 使用var关键字 var a, b, c bool var s1, s2 string = “hello”, “world” 可放在函数内，或直接放在包内(看上去像全局变量，其实不是) 使用var()集中定义变量 让编译器自动决定类型1var a, b, i, s1, s2 = true, false, 3, “hello”, “world&amp;quot;    使用:=定义变量  可以写得短一">
-<meta property="og:updated_time" content="2018-02-12T15:46:02.000Z">
+<meta property="og:description" content="1. 使用var关键字 var a, b, c bool var s1, s2 string = “hello”, “world” 可放在函数内，或直接放在包内(看上去像全局变量，其实不是) 使用var()集中定义变量 让编译器自动决定类型1var a, b, i, s1, s2 = true, false, 3, &amp;quot;hello&amp;quot;, &amp;quot;world&amp;quot;    使">
+<meta property="og:updated_time" content="2018-02-13T14:21:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go语言变量定义">
-<meta name="twitter:description" content="1. 使用var关键字 var a, b, c bool var s1, s2 string = “hello”, “world” 可放在函数内，或直接放在包内(看上去像全局变量，其实不是) 使用var()集中定义变量 让编译器自动决定类型1var a, b, i, s1, s2 = true, false, 3, “hello”, “world&amp;quot;    使用:=定义变量  可以写得短一">
+<meta name="twitter:description" content="1. 使用var关键字 var a, b, c bool var s1, s2 string = “hello”, “world” 可放在函数内，或直接放在包内(看上去像全局变量，其实不是) 使用var()集中定义变量 让编译器自动决定类型1var a, b, i, s1, s2 = true, false, 3, &amp;quot;hello&amp;quot;, &amp;quot;world&amp;quot;    使">
   
     <link rel="alternative" href="/atom.xml" title="Icey Yu&#39;s Blog" type="application/atom+xml">
   
@@ -183,19 +183,19 @@
 <li>var s1, s2 string = “hello”, “world”</li>
 <li>可放在函数内，或直接放在包内(看上去像全局变量，其实不是)</li>
 <li>使用var()集中定义变量</li>
-<li>让编译器自动决定类型<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a, b, i, s1, s2 = true, false, 3, “hello”, “world&quot;</span><br></pre></td></tr></table></figure>
+<li>让编译器自动决定类型<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a, b, i, s1, s2 = true, false, 3, &quot;hello&quot;, &quot;world&quot;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ul>
-<li>使用:=定义变量<br>  可以写得短一点<br>  只能在函数内使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b, i, s1, s2 := true, false, 3, “hello”, “world&quot;</span><br></pre></td></tr></table></figure>
+<li>使用:=定义变量<br>  可以写得短一点<br>  只能在函数内使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">func variableShorter() &#123;</span><br><span class="line">	a, b, i, s1, s2 := true, false, 3, &quot;hello&quot;, &quot;world&quot;</span><br><span class="line">	fmt.Println(a, b, i, s1, s2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="2-内建变量类型"><a href="#2-内建变量类型" class="headerlink" title="2. 内建变量类型"></a>2. 内建变量类型</h3><p>u无符号不加u有符号，uintptr 指针，指针长度根据操作系统来的<br>rune go语言的char类型，字符型，32位（4字节int sign），一字节的char有很坑，<br>complex 复数, 实部虚部</p>
 <p>bool, string<br>(u)int, (u)int8, (u)int16, (u)int32, (u)int64, uintptr<br>byte, rune 整数的别名<br>float32, float64, complex64, complex128</p>
-<h3 id="3-欧拉公式"><a href="#3-欧拉公式" class="headerlink" title="3. 欧拉公式"></a>3. 欧拉公式</h3><p>$$e^iπ + 1=0$$</p>
+<h3 id="3-欧拉公式"><a href="#3-欧拉公式" class="headerlink" title="3. 欧拉公式"></a>3. 欧拉公式</h3><p>$$e^iπ + 1=0$$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">func euler() &#123;</span><br><span class="line">    fmt.Println(cmplx.Pow(math.E, 1i * math.Pi) + 1)</span><br><span class="line">    fmt.Println(cmplx.Exp(1i * math.Pi) + 1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="4-强制类型转换"><a href="#4-强制类型转换" class="headerlink" title="4. 强制类型转换"></a>4. 强制类型转换</h3><p>类型转换是强制的，float精度不准<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a, b int = 3, 4</span><br><span class="line">var c int = int(math.Sqrt(float64(a*a + b*b))) ?</span><br></pre></td></tr></table></figure></p>
-<h3 id="5-常量的定义-不需要大写，在go中首字母大写表示public"><a href="#5-常量的定义-不需要大写，在go中首字母大写表示public" class="headerlink" title="5. 常量的定义(不需要大写，在go中首字母大写表示public)"></a>5. 常量的定义(不需要大写，在go中首字母大写表示public)</h3><p>const数值可作为各种类型使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const a, b = 3, 4</span><br><span class="line">var c int = int(math.Sqrt(a*a + b*b))</span><br></pre></td></tr></table></figure></p>
-<h3 id="6-使用常量定义枚举类型"><a href="#6-使用常量定义枚举类型" class="headerlink" title="6. 使用常量定义枚举类型"></a>6. 使用常量定义枚举类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const (</span><br><span class="line">    cpp = iota    </span><br><span class="line">    java</span><br><span class="line">    python</span><br><span class="line">    javascript</span><br><span class="line">)</span><br><span class="line">// 0,  1,  2, 3   iota表示自增</span><br></pre></td></tr></table></figure>
+<h3 id="5-常量的定义-不需要大写，在go中首字母大写表示public"><a href="#5-常量的定义-不需要大写，在go中首字母大写表示public" class="headerlink" title="5. 常量的定义(不需要大写，在go中首字母大写表示public)"></a>5. 常量的定义(不需要大写，在go中首字母大写表示public)</h3><p>const数值可作为各种类型使用，相当于文本替换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const a, b = 3, 4</span><br><span class="line">var c int = int(math.Sqrt(a*a + b*b))</span><br><span class="line">const (</span><br><span class="line">    filename = &apos;abc.txt&apos;</span><br><span class="line">    a, b = 3, 4</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h3 id="6-使用常量定义枚举类型"><a href="#6-使用常量定义枚举类型" class="headerlink" title="6. 使用常量定义枚举类型"></a>6. 使用常量定义枚举类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const (</span><br><span class="line">    cpp = iota    </span><br><span class="line">    _</span><br><span class="line">    python</span><br><span class="line">    javascript</span><br><span class="line">)</span><br><span class="line">// 0,  1,  2, 3   iota表示自增</span><br><span class="line">// b, kb, mb, gb, tb, pb</span><br><span class="line">const (</span><br><span class="line">    b = 1 &lt;&lt; (10 * iota)</span><br><span class="line">    kb</span><br><span class="line">    mb</span><br><span class="line">    gb</span><br><span class="line">    tb</span><br><span class="line">    pb</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <h3 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h3><ul>
 <li>变量类型写在变量名之后</li>
 <li>编译器可推测变量类型</li>
@@ -305,6 +305,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/02/13/go-branch-loop/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Go语言条件语句与循环
+        
+      </div>
+    </a>
   
   
     <a href="/2018/02/12/fishear-first-blog/" id="article-nav-older" class="article-nav-link-wrap">
@@ -434,11 +443,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Go, 2018 Spring Festival</a>
+                <a href="javascript:void(0)" class="js-tag color5">Go, varitalbe definition</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Go, varitalbe definition</a>
+                <a href="javascript:void(0)" class="js-tag color2">Go, branch, loop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Go, 2018 Spring Festival</a>
               </li>
             
             <div class="clearfix"></div>
@@ -521,7 +534,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">每天坚持写博客，&lt;br&gt;让自己变得更强</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">坚持写博客，&lt;br&gt;让自己变得更强</div>
   	  	
     	</section>
     

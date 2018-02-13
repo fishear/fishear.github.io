@@ -155,6 +155,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-go-branch-loop" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/13/go-branch-loop/">Go语言条件语句与循环</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/13/go-branch-loop/" class="archive-article-date">
+  	<time datetime="2018-02-13T15:29:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-if语句"><a href="#1-if语句" class="headerlink" title="1. if语句"></a>1. if语句</h3><ul>
+<li>if的条件里可以赋值</li>
+<li>if的条件里赋值的变量作用域就在这个if语句里<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const filename = &quot;file.txt&quot;</span><br><span class="line">if contents, err := ioutil.ReadFile(filename); err !=nil &#123;</span><br><span class="line">    fmt.Println(err)</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    fmt.Printf(&quot;%s\n&quot;, contents)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-switch语句"><a href="#2-switch语句" class="headerlink" title="2. switch语句"></a>2. switch语句</h3><ul>
+<li>switch会自动break（默认每个case后会有break）,不需要break除非使用fallthrough</li>
+<li>switch后可以没有表达式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">g := &quot;&quot;</span><br><span class="line">switch &#123;</span><br><span class="line">case score &lt; 0 || score &gt; 100:</span><br><span class="line">    panic(fmt.Sprintf(&quot;Wrong score: %d&quot;, score))</span><br><span class="line">case score &lt; 60:</span><br><span class="line">    g = &quot;F&quot;</span><br><span class="line">case score &lt; 80:</span><br><span class="line">    g = &quot;C&quot;</span><br><span class="line">case score &lt; 90:</span><br><span class="line">    g = &quot;B&quot;</span><br><span class="line">case score &lt;=100:</span><br><span class="line">    g = &quot;A&quot;</span><br><span class="line">default:</span><br><span class="line">    // panic会报错，并中断程序的执行</span><br><span class="line">    panic(fmt.Sprintf(&quot;Wrong score: %d&quot;, score))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-for循环"><a href="#3-for循环" class="headerlink" title="3. for循环"></a>3. for循环</h3><ul>
+<li>for的条件里不需要括号</li>
+<li>for的条件里可以省略初始条件，结束条件，递增表达式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">file, err := os.Open(filename)</span><br><span class="line">if err != nil &#123;</span><br><span class="line">    panic(err)</span><br><span class="line">&#125;</span><br><span class="line">scanner := bufio.NewScanner(file) // 逐行读取</span><br><span class="line"></span><br><span class="line">for scanner.Scan() &#123;</span><br><span class="line">    // 相当于while, go语言没有while语句；没有初始条件和递增条件，只有结束条件时，不需要分号</span><br><span class="line">    fmt.Println(scanner.Text())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>for, if后面的条件没有括号</li>
+<li>if条件里也可以定义变量</li>
+<li>没有while</li>
+<li>switch不需要break, 也可以直接switch多个条件</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Go, branch, loop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/13/go-branch-loop/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-go-variable-definition" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -180,19 +274,19 @@
 <li>var s1, s2 string = “hello”, “world”</li>
 <li>可放在函数内，或直接放在包内(看上去像全局变量，其实不是)</li>
 <li>使用var()集中定义变量</li>
-<li>让编译器自动决定类型<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a, b, i, s1, s2 = true, false, 3, “hello”, “world&quot;</span><br></pre></td></tr></table></figure>
+<li>让编译器自动决定类型<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a, b, i, s1, s2 = true, false, 3, &quot;hello&quot;, &quot;world&quot;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ul>
-<li>使用:=定义变量<br>  可以写得短一点<br>  只能在函数内使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b, i, s1, s2 := true, false, 3, “hello”, “world&quot;</span><br></pre></td></tr></table></figure>
+<li>使用:=定义变量<br>  可以写得短一点<br>  只能在函数内使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">func variableShorter() &#123;</span><br><span class="line">	a, b, i, s1, s2 := true, false, 3, &quot;hello&quot;, &quot;world&quot;</span><br><span class="line">	fmt.Println(a, b, i, s1, s2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="2-内建变量类型"><a href="#2-内建变量类型" class="headerlink" title="2. 内建变量类型"></a>2. 内建变量类型</h3><p>u无符号不加u有符号，uintptr 指针，指针长度根据操作系统来的<br>rune go语言的char类型，字符型，32位（4字节int sign），一字节的char有很坑，<br>complex 复数, 实部虚部</p>
 <p>bool, string<br>(u)int, (u)int8, (u)int16, (u)int32, (u)int64, uintptr<br>byte, rune 整数的别名<br>float32, float64, complex64, complex128</p>
-<h3 id="3-欧拉公式"><a href="#3-欧拉公式" class="headerlink" title="3. 欧拉公式"></a>3. 欧拉公式</h3><p>$$e^iπ + 1=0$$</p>
+<h3 id="3-欧拉公式"><a href="#3-欧拉公式" class="headerlink" title="3. 欧拉公式"></a>3. 欧拉公式</h3><p>$$e^iπ + 1=0$$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">func euler() &#123;</span><br><span class="line">    fmt.Println(cmplx.Pow(math.E, 1i * math.Pi) + 1)</span><br><span class="line">    fmt.Println(cmplx.Exp(1i * math.Pi) + 1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="4-强制类型转换"><a href="#4-强制类型转换" class="headerlink" title="4. 强制类型转换"></a>4. 强制类型转换</h3><p>类型转换是强制的，float精度不准<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a, b int = 3, 4</span><br><span class="line">var c int = int(math.Sqrt(float64(a*a + b*b))) ?</span><br></pre></td></tr></table></figure></p>
-<h3 id="5-常量的定义-不需要大写，在go中首字母大写表示public"><a href="#5-常量的定义-不需要大写，在go中首字母大写表示public" class="headerlink" title="5. 常量的定义(不需要大写，在go中首字母大写表示public)"></a>5. 常量的定义(不需要大写，在go中首字母大写表示public)</h3><p>const数值可作为各种类型使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const a, b = 3, 4</span><br><span class="line">var c int = int(math.Sqrt(a*a + b*b))</span><br></pre></td></tr></table></figure></p>
-<h3 id="6-使用常量定义枚举类型"><a href="#6-使用常量定义枚举类型" class="headerlink" title="6. 使用常量定义枚举类型"></a>6. 使用常量定义枚举类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const (</span><br><span class="line">    cpp = iota    </span><br><span class="line">    java</span><br><span class="line">    python</span><br><span class="line">    javascript</span><br><span class="line">)</span><br><span class="line">// 0,  1,  2, 3   iota表示自增</span><br></pre></td></tr></table></figure>
+<h3 id="5-常量的定义-不需要大写，在go中首字母大写表示public"><a href="#5-常量的定义-不需要大写，在go中首字母大写表示public" class="headerlink" title="5. 常量的定义(不需要大写，在go中首字母大写表示public)"></a>5. 常量的定义(不需要大写，在go中首字母大写表示public)</h3><p>const数值可作为各种类型使用，相当于文本替换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const a, b = 3, 4</span><br><span class="line">var c int = int(math.Sqrt(a*a + b*b))</span><br><span class="line">const (</span><br><span class="line">    filename = &apos;abc.txt&apos;</span><br><span class="line">    a, b = 3, 4</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h3 id="6-使用常量定义枚举类型"><a href="#6-使用常量定义枚举类型" class="headerlink" title="6. 使用常量定义枚举类型"></a>6. 使用常量定义枚举类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const (</span><br><span class="line">    cpp = iota    </span><br><span class="line">    _</span><br><span class="line">    python</span><br><span class="line">    javascript</span><br><span class="line">)</span><br><span class="line">// 0,  1,  2, 3   iota表示自增</span><br><span class="line">// b, kb, mb, gb, tb, pb</span><br><span class="line">const (</span><br><span class="line">    b = 1 &lt;&lt; (10 * iota)</span><br><span class="line">    kb</span><br><span class="line">    mb</span><br><span class="line">    gb</span><br><span class="line">    tb</span><br><span class="line">    pb</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <h3 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h3><ul>
 <li>变量类型写在变量名之后</li>
 <li>编译器可推测变量类型</li>
@@ -493,11 +587,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Go, 2018 Spring Festival</a>
+                <a href="javascript:void(0)" class="js-tag color5">Go, varitalbe definition</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Go, varitalbe definition</a>
+                <a href="javascript:void(0)" class="js-tag color2">Go, branch, loop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Go, 2018 Spring Festival</a>
               </li>
             
             <div class="clearfix"></div>
@@ -580,7 +678,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">每天坚持写博客，&lt;br&gt;让自己变得更强</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">坚持写博客，&lt;br&gt;让自己变得更强</div>
   	  	
     	</section>
     
