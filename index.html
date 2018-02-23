@@ -56,8 +56,6 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
-	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -114,8 +112,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -136,9 +132,7 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
-		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -154,6 +148,101 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-go-pointer-array-slice" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/22/go-pointer-array-slice/">go-pointer-array-slice</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/22/go-pointer-array-slice/" class="archive-article-date">
+  	<time datetime="2018-02-22T02:59:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-指针"><a href="#1-指针" class="headerlink" title="1. 指针"></a>1. 指针</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   var a int = 666</span><br><span class="line">var pa *int = &amp;a</span><br><span class="line">*pa = 888</span><br><span class="line">fmt.Println(*pa)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Go语言的指针不能运算</li>
+<li>Go语言只有值传递一种方式</li>
+</ul>
+<h3 id="2-数组、切片和容器"><a href="#2-数组、切片和容器" class="headerlink" title="2. 数组、切片和容器"></a>2. 数组、切片和容器</h3><h4 id="2-1-数组定义：数量写在类型前"><a href="#2-1-数组定义：数量写在类型前" class="headerlink" title="2.1 数组定义：数量写在类型前"></a>2.1 数组定义：数量写在类型前</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr1 [5]int</span><br><span class="line">arr2 := [3]int&#123;1, 3, 5&#125;</span><br><span class="line">arr3 := [...]int&#123;2, 4, 6, 8, 10&#125;</span><br><span class="line">var grid [4][5]int</span><br></pre></td></tr></table></figure>
+<p>:=需要给数组一个初始值<br>[…]表示告诉编译器自己去计算数组长度，[]里什么都不写表示切片</p>
+<h4 id="2-2-数组的遍历"><a href="#2-2-数组的遍历" class="headerlink" title="2.2 数组的遍历"></a>2.2 数组的遍历</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// for循环</span><br><span class="line">    for i :=0;i &lt; len(arr3); i++ &#123;</span><br><span class="line">        fmt.Println(arr3[i])</span><br><span class="line">    &#125;</span><br><span class="line">// range</span><br><span class="line">    for i, v := range arr3 &#123;</span><br><span class="line">        fmt.Println(i, v)</span><br><span class="line">    &#125;</span><br><span class="line">// 省略i</span><br><span class="line">    sum := 0</span><br><span class="line">    for _, v := range arr3 &#123;</span><br><span class="line">        sum += v</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可能过_省略变量</li>
+<li>不仅range, 任何地方都可通过_省略变量</li>
+<li>如果只要i, 可写成for i := range arr</li>
+</ul>
+<h4 id="2-3-数组是值类型"><a href="#2-3-数组是值类型" class="headerlink" title="2.3 数组是值类型"></a>2.3 数组是值类型</h4><ul>
+<li>[10]int 和 [20]int是不同类型</li>
+<li>调用func f(arr [5]int)会拷贝数组</li>
+<li>在go语言中一般不直接使用数组</li>
+</ul>
+<h3 id="3-Slice-切片"><a href="#3-Slice-切片" class="headerlink" title="3. Slice(切片)"></a>3. Slice(切片)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr := [...]int&#123;0, 1, 2 ,3, 4, 5, 6, 7&#125;</span><br><span class="line">s := arr[2:6]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>slice是对数组的一个view(视图)</li>
+</ul>
+<h4 id="3-1-slice的扩展"><a href="#3-1-slice的扩展" class="headerlink" title="3.1 slice的扩展"></a>3.1 slice的扩展</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   arr := [...]int&#123;0, 1, 2 ,3, 4, 5, 6, 7&#125;</span><br><span class="line">   s1 = arr[2:6]</span><br><span class="line">s2 = s1[3:5]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>s1的值为[2, 3, 4, 5]，s2的值为[5, 6]</li>
+<li>slice可以向后扩展，不可以向前扩展</li>
+<li>s[i]不可以超越len(s), 向后不可以超越底层数组cap(s)</li>
+</ul>
+<h4 id="3-2-向slice添加元素"><a href="#3-2-向slice添加元素" class="headerlink" title="3.2 向slice添加元素"></a>3.2 向slice添加元素</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s3 := append(s2, 10) // [5, 6, 10]</span><br><span class="line">s4 := append(s3, 11) // [5, 6, 10, 11]</span><br><span class="line">s5 := append(s4, 12) // [5, 6, 10, 11, 12]</span><br><span class="line">// arr = [0, 1, 2 ,3, 4, 5, 6, 10]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>添加时如果超越cap, 系统会重新分配更大的底层数组</li>
+<li>由于值传递的关系，必须接收append的返回值</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/22/go-pointer-array-slice/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-go-branch-loop" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -281,7 +370,7 @@
 <li>使用:=定义变量<br>  可以写得短一点<br>  只能在函数内使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">func variableShorter() &#123;</span><br><span class="line">	a, b, i, s1, s2 := true, false, 3, &quot;hello&quot;, &quot;world&quot;</span><br><span class="line">	fmt.Println(a, b, i, s1, s2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="2-内建变量类型"><a href="#2-内建变量类型" class="headerlink" title="2. 内建变量类型"></a>2. 内建变量类型</h3><p>u无符号不加u有符号，uintptr 指针，指针长度根据操作系统来的<br>rune go语言的char类型，字符型，32位（4字节int sign），一字节的char有很坑，<br>complex 复数, 实部虚部</p>
+<h3 id="2-内建变量类型"><a href="#2-内建变量类型" class="headerlink" title="2. 内建变量类型"></a>2. 内建变量类型</h3><p>u无符号不加u有符号，uintptr 指针，指针长度根据操作系统来的<br>rune go语言的char类型，字符型，32位（4字节int sign），一字节的char有很多坑，<br>complex 复数, 实部虚部</p>
 <p>bool, string<br>(u)int, (u)int8, (u)int16, (u)int32, (u)int64, uintptr<br>byte, rune 整数的别名<br>float32, float64, complex64, complex128</p>
 <h3 id="3-欧拉公式"><a href="#3-欧拉公式" class="headerlink" title="3. 欧拉公式"></a>3. 欧拉公式</h3><p>$$e^iπ + 1=0$$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">func euler() &#123;</span><br><span class="line">    fmt.Println(cmplx.Pow(math.E, 1i * math.Pi) + 1)</span><br><span class="line">    fmt.Println(cmplx.Exp(1i * math.Pi) + 1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="4-强制类型转换"><a href="#4-强制类型转换" class="headerlink" title="4. 强制类型转换"></a>4. 强制类型转换</h3><p>类型转换是强制的，float精度不准<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a, b int = 3, 4</span><br><span class="line">var c int = int(math.Sqrt(float64(a*a + b*b))) ?</span><br></pre></td></tr></table></figure></p>
@@ -306,7 +395,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Go, varitalbe definition</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Go, varialbe definition</a>
         		</li>
       		
 		</ul>
@@ -587,7 +676,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Go, varitalbe definition</a>
+                <a href="javascript:void(0)" class="js-tag color5">Go, 2018 Spring Festival</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -595,7 +684,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Go, 2018 Spring Festival</a>
+                <a href="javascript:void(0)" class="js-tag color4">Go, varialbe definition</a>
               </li>
             
             <div class="clearfix"></div>
