@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://fishear.github.io">
-  <title>Tag: go, pointer, array, slice | Icey Yu&#39;s Blog</title>
+  <title>summary-of-react-application-test | Icey Yu&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Icey Yu&#39;s Blog">
-<meta property="og:url" content="https://fishear.github.io/tags/go-pointer-array-slice/index.html">
+  <meta name="description" content="写在前面的话这篇文章是在做完react应用单元组件测试后一篇总结，里面提到了一些构建测试过程中遇到的问题，并给出了相应的解决方案，只是个人观点。 1.Connected Components测试通常React应用会使用React Redux管理组件状态，大部分组件使用了connect()方法。例如：12345import &amp;#123; connect &amp;#125; from &quot;react-redu">
+<meta name="keywords" content="react, testing, summary">
+<meta property="og:type" content="article">
+<meta property="og:title" content="summary-of-react-application-test">
+<meta property="og:url" content="https://fishear.github.io/2018/07/02/summary-of-react-application-test/index.html">
 <meta property="og:site_name" content="Icey Yu&#39;s Blog">
+<meta property="og:description" content="写在前面的话这篇文章是在做完react应用单元组件测试后一篇总结，里面提到了一些构建测试过程中遇到的问题，并给出了相应的解决方案，只是个人观点。 1.Connected Components测试通常React应用会使用React Redux管理组件状态，大部分组件使用了connect()方法。例如：12345import &amp;#123; connect &amp;#125; from &quot;react-redu">
+<meta property="og:updated_time" content="2018-07-02T03:57:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Icey Yu&#39;s Blog">
+<meta name="twitter:title" content="summary-of-react-application-test">
+<meta name="twitter:description" content="写在前面的话这篇文章是在做完react应用单元组件测试后一篇总结，里面提到了一些构建测试过程中遇到的问题，并给出了相应的解决方案，只是个人观点。 1.Connected Components测试通常React应用会使用React Redux管理组件状态，大部分组件使用了connect()方法。例如：12345import &amp;#123; connect &amp;#125; from &quot;react-redu">
   
     <link rel="alternative" href="/atom.xml" title="Icey Yu&#39;s Blog" type="application/atom+xml">
   
@@ -147,71 +152,197 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-summary-of-react-application-test" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/22/go-pointer-array-slice/" class="archive-article-date">
-  	<time datetime="2018-02-22T02:59:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-22</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/22/go-pointer-array-slice/">指针、数组与切片</a>
+    <h1 class="article-title" itemprop="name">
+      summary-of-react-application-test
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/07/02/summary-of-react-application-test/" class="archive-article-date">
+  	<time datetime="2018-07-02T03:46:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="写在前面的话"><a href="#写在前面的话" class="headerlink" title="写在前面的话"></a>写在前面的话</h3><p>这篇文章是在做完react应用单元组件测试后一篇总结，里面提到了一些构建测试过程中遇到的问题，并给出了相应的解决方案，只是个人观点。</p>
+<h5 id="1-Connected-Components测试"><a href="#1-Connected-Components测试" class="headerlink" title="1.Connected Components测试"></a>1.Connected Components测试</h5><p>通常React应用会使用<a href="https://github.com/gaearon/redux-thunk" target="_blank" rel="noopener">React Redux</a>管理组件状态，大部分组件使用了<a href="https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options" target="_blank" rel="noopener">connect()</a>方法。例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">"react-redux"</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sidebar</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(mapStateToProps, mapDispatchToProps)(Sidebar);</span><br></pre></td></tr></table></figure></p>
+<p>在单元测试中，一般像这样引入Sidebar组件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Sidebar <span class="keyword">from</span> <span class="string">'../../../src/components/Sidebar/index'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>然而，这种方式实际上得到的是connect()方法返回的包装组件。如果仅仅是测试组件的渲染，不需要redux store, 社区推荐同时导出未装饰的组件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">"react-redux"</span></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">Sidebar</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(mapStateToProps, mapDispatchToProps)(Sidebar);</span><br></pre></td></tr></table></figure></p>
+<p>默认导出的仍然是connect()返回的组件，不需要修改应用代码。在单元测试中可以用如下方式引入组件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Sidebar &#125; <span class="keyword">from</span> <span class="string">'../../../src/components/Sidebar/index'</span>;</span><br></pre></td></tr></table></figure></p>
+<h5 id="2-异步请求返回错误及捕获异常"><a href="#2-异步请求返回错误及捕获异常" class="headerlink" title="2.异步请求返回错误及捕获异常"></a>2.异步请求返回错误及捕获异常</h5><p>React actions单元测试中，可以使用<a href="https://github.com/node-nock/nock" target="_blank" rel="noopener">nock</a>来模拟HTTP请求，针对一个异步action，例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getUserList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">dispatch, getState</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> dispatch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> dyFetch(<span class="string">`users`</span>, <span class="string">"GET"</span>)</span><br><span class="line">        .then(<span class="function"><span class="params">response</span> =&gt;</span> response.json())</span><br><span class="line">        .then(<span class="function"><span class="params">json</span> =&gt;</span> dispatch(receiveUsers(json)))</span><br><span class="line">        .catch(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(e);</span><br><span class="line">          <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>测试请求成功用例如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">it(<span class="string">"getUserList success"</span>, () =&gt; &#123;</span><br><span class="line">    nock(<span class="string">`<span class="subst">$&#123;uri&#125;</span>`</span>)</span><br><span class="line">        .get(<span class="string">"/users"</span>)</span><br><span class="line">        .reply(<span class="number">200</span>, &#123; <span class="attr">code</span>: <span class="number">0</span> &#125;);</span><br><span class="line">    <span class="keyword">const</span> expectedActions = [&#123; <span class="attr">type</span>: GET_USERS_SUCCESS &#125;];</span><br><span class="line">    <span class="keyword">const</span> store = mockStore(&#123;&#125;);</span><br><span class="line">    <span class="keyword">return</span> store.dispatch(getUserList()).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        expect(store.getActions()).toEqual(expectedActions)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>模拟请求返回错误，可以使用<a href="https://github.com/node-nock/nock#replying-with-errors" target="_blank" rel="noopener">replyWithError</a>方法，例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">it(<span class="string">"getUserList exception"</span>, () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> error = &#123;<span class="string">'message'</span>: <span class="string">'something awful happened'</span>, <span class="string">'code'</span>: <span class="string">'AWFUL_ERROR'</span>&#125;;</span><br><span class="line">    expect.assertions(<span class="number">2</span>);</span><br><span class="line">    nock(<span class="string">`<span class="subst">$&#123;uri&#125;</span>`</span>)</span><br><span class="line">        .get(<span class="string">"/users"</span>)</span><br><span class="line">        .replyWithError(error);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> store = mockStore(&#123;&#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> store.dispatch(getUserList()).catch(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">            expect(e.code).toBe(error.code);</span><br><span class="line">            expect(e.message).toContain(error.message);</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>测试捕获异常代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.catch(<span class="function"><span class="params">e</span>=&gt;</span> &#123;</span><br><span class="line">    expect(e).toBeInstanceOf(<span class="built_in">Error</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>在模拟异步请求时，有时会遇到一些错误：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Nock: No match <span class="keyword">for</span> request &#123;<span class="comment">/* ... */</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以使用<a href="https://github.com/node-nock/nock#logging" target="_blank" rel="noopener">log</a>方法输出是否匹配的日志：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nock(<span class="string">`<span class="subst">$&#123;uri&#125;</span>`</span>)</span><br><span class="line">   .get(<span class="string">"/projectscc"</span>)</span><br><span class="line">   .reply(<span class="number">200</span>, &#123; <span class="attr">code</span>: <span class="number">0</span> &#125;)</span><br><span class="line">   .log(<span class="function"><span class="params">data</span> =&gt;</span> <span class="built_in">console</span>.log(data));</span><br></pre></td></tr></table></figure></p>
+<p>返回结果是true/false。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">matching http:<span class="comment">//10.118.22.124:9006 to GET http://10.118.22.124:9006/projects: false</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="3-Portal组件测试"><a href="#3-Portal组件测试" class="headerlink" title="3.Portal组件测试"></a>3.Portal组件测试</h5><p>&emsp;&emsp;在我测试的React应用中，使用了实现<a href="https://material.io/guidelines/material-design/introduction.html#introduction-principles" target="_blank" rel="noopener">Google’s Material Design</a> 的React组件库<a href="https://github.com/callemall/material-ui" target="_blank" rel="noopener">Materil-UI</a>。<br>对话框使用了Dialog组件，如Sidebar组件，在针对Sidebar组件的单元测试中，只渲染Sidebar，并使用<a href="http://airbnb.io/enzyme/index.html" target="_blank" rel="noopener">enzyme</a>的<a href="http://airbnb.io/enzyme/docs/api/mount.html" target="_blank" rel="noopener">mount</a>方法渲染，<a href="http://airbnb.io/enzyme/docs/api/ReactWrapper/find.html" target="_blank" rel="noopener">find()</a>方法查找Dialog的子组件，是没有办法找到的，会返回null，如查找弹窗的确认按钮来模拟点击事件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> button = wrapper.find(<span class="string">'Dialog'</span>).at(<span class="number">1</span>).find(<span class="string">'FlatButton'</span>).at(<span class="number">0</span>);</span><br><span class="line">button.simulate(<span class="string">'click'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>报错信息为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Method “simulate” is only meant to be run on a single node. <span class="number">0</span> found instead.</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;原因其实很好理解，因为Dialog是<a href="https://github.com/tajo/react-portal" target="_blank" rel="noopener">portal</a>组件。这意味着这类组件把创建的DOM元素直接追加在document根元素上，而不是作为父组件的子组件。这是enzyme官网的一个<a href="https://github.com/airbnb/enzyme/issues/252" target="_blank" rel="noopener">open issue</a>。网上给出了一个workaround，即在Dialog上加一个标志性的className，使用document.querySelector查找到这个DOM元素，并用ReactWrapper封装返回，这样就可以用enzyme的<a href="http://airbnb.io/enzyme/docs/api/ReactWrapper/find.html" target="_blank" rel="noopener">find()</a>方法查找Dialog里的子元素，代码示例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ele = <span class="built_in">document</span>.body.querySelector(<span class="string">`.<span class="subst">$&#123;className&#125;</span>`</span>);</span><br><span class="line"><span class="keyword">if</span> (ele) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> ReactWrapper(ele, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> ReactWrapper();</span><br></pre></td></tr></table></figure></p>
+<h5 id="4-关于事件模拟"><a href="#4-关于事件模拟" class="headerlink" title="4.关于事件模拟"></a>4.关于事件模拟</h5><p>&emsp;&emsp;在讲这点之前，想先说说<a href="http://airbnb.io/enzyme/docs/api/shallow.html" target="_blank" rel="noopener">shallow</a>和<a href="http://airbnb.io/enzyme/docs/api/mount.html" target="_blank" rel="noopener">mount</a>的区别，shallow只渲染当前组件，只能能对当前组件做断言；mount会渲染当前组件以及所有子组件，对所有子组件也可以进行查找断言操作。一般交互测试涉及到子组件或者生命周期函数可以使用mount。但是mount耗时更长，占用更多内存，如果没必要操作和断言子组件，推荐使用shallow。<br>通常官网给的示例中组件结构都比较简单，但是一般我们写的React代码会使用第三方类库，如<a href="https://github.com/callemall/material-ui" target="_blank" rel="noopener">Materil-UI</a>，经常使用的基础组件有<a href="http://www.material-ui.com/#/components/text-field" target="_blank" rel="noopener">TextField</a>、<a href="http://www.material-ui.com/#/components/raised-button" target="_blank" rel="noopener">RaisedButton</a>。<br>在编写测试用例的时候发现如果用shallow渲染组件，可以模拟触发TextField的change事件，如某平台中的Login组件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> wrapper = shallow(&lt;Login.WrappedComponent &#123;...props&#125; /&gt;);</span><br><span class="line">    ...</span><br><span class="line">// 设置state</span><br><span class="line">let textField = wrapper.find("TextField");</span><br><span class="line"></span><br><span class="line">let mockEvent = &#123;</span><br><span class="line">  target: &#123;</span><br><span class="line">    value: ''</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">let nameField = textField.first();</span><br><span class="line">let mockName = 'mock name';</span><br><span class="line">mockEvent.target.value = mockName;</span><br><span class="line">nameField.simulate('change', mockEvent);</span><br><span class="line">expect(wrapper.state('name')).toBe(mockName);</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;然而，对于需要要测试子组件交互的组件，采用的是mount方式渲染，如Sidebar组件，但是采用上述方式模拟TextField的change事件，是不会被触发的。<br>&emsp;&emsp;enzyme的成员之一<a href="https://github.com/ljharb" target="_blank" rel="noopener">ljharb</a>在github上的<a href="https://github.com/airbnb/enzyme/issues/780#issuecomment-274246845" target="_blank" rel="noopener">#780(comment)</a>上给出的解释是，“simulate does not work on “not a DOM node”，也就是说simulate对非DOM结点不起作用，同时他推荐对于包含非DOM结点子组件的父组件测试，只需要测试子组件是否正常渲染，事件模拟在对应的子组件的测试用例中编写，不要在一个测试文件中涵盖太多用例。这也从侧面反应了在开发阶段需要合理地拆分组件。至于为什么shallow render可以模拟，个人观点认为是因为shallow只渲染第一层，不渲染所有子组件,于是enzyme把子组件的JSX标签当作普通的HTML标签。</p>
+<p>&emsp;&emsp;针对change事件的模拟，可以找到TextField里面的真实DOM元素input，再模拟input的change事件。测试代码为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> oldPwdField = textField.at(<span class="number">0</span>).find(<span class="string">'input'</span>).last();</span><br><span class="line"><span class="keyword">let</span> mockOldPwd = <span class="string">'mock old pwd'</span>;</span><br><span class="line">mockEvent.target.value = mockOldPwd;</span><br><span class="line">oldPwdField.simulate(<span class="string">'change'</span>, mockEvent);</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;在<a href="https://github.com/airbnb/enzyme/issues/1066" target="_blank" rel="noopener">#1066</a>中，enzyme成员也给出了一种测试用例写法，推荐只模拟原生事件（on<em>事件在组件标签上不属于原生事件，这与react的事件监听也是一致的，没有经过特殊处理的话，on</em> 的事件监听只能用在普通的 HTML 的标签上，而不能用在组件标签上），组件标签的事件模拟推荐当作属性直接调用事件处理函数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textField.at(<span class="number">0</span>).prop(<span class="string">'on&lt;x&gt;change'</span>)(mockEvent);</span><br></pre></td></tr></table></figure></p>
+<h5 id="5-定时器模拟"><a href="#5-定时器模拟" class="headerlink" title="5.定时器模拟"></a>5.定时器模拟</h5><p>定时器函数（例如，setTimeout, setInterval, clearTimeout, clearInterval）对测试环境来说不是很理想，因为他们依赖于真实的时间流逝。对于这样一段代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">_</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; usersByProject &#125; = <span class="keyword">this</span>.props;</span><br><span class="line">  <span class="keyword">if</span> (usersByProject &amp;&amp; usersByProject[<span class="number">0</span>]) &#123;</span><br><span class="line">    <span class="keyword">this</span>.handleProjectChange(<span class="literal">null</span>, <span class="literal">null</span>, usersByProject[<span class="number">0</span>].projectId);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, <span class="number">600</span>);</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;setTimeout()回调中调用了this.handleProjectChange，如果不做任何处理，该方法会在我们收集到测试结果报告后被调用。事实证明确实如此，this.handleProjectChange没有被调用，导致某些state没有被初始化，后续的测试用例失败。<br>&emsp;&emsp;jest提供了<a href="http://facebook.github.io/jest/docs/en/jest-ob&lt;x&gt;ject.html#jestusefaketimers" target="_blank" rel="noopener">jest.usefaketimers</a>来模拟setTimeout等定时器函数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jest.useFakeTimers();</span><br><span class="line">setTimeout( <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    expect(setTimeout.mock.calls.length).toBe(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">&#125;, <span class="number">600</span>);</span><br><span class="line">jest.runAllTimers();</span><br></pre></td></tr></table></figure></p>
+<p>以上是在编写React单元测试中的一些总结，如不错误之处请指正。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">go, pointer, array, slice</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">react, testing, summary</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/go//" class="article-tag-list-link color3">go</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://fishear.github.io/2018/07/02/summary-of-react-application-test/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/07/02/testing-react-application-with-jest-and-enzyme/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          testing-react-application-with-jest-and-enzyme
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/06/03/serveral-ways-to-create-objects/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">创建对象的几种方式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -234,9 +365,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
